@@ -1,0 +1,212 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+
+
+    <style>
+    @@font-face {
+    font-family: myFirstFont;
+    src: url("/fonts/OpenSans-Regular-webfont.woff2");
+    }
+
+
+        body {
+            background-color: #DAD8A7;
+        }
+
+        input {
+            color: #222;
+            background-color: #DAD8A7;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            color: #DAD8A7;
+            text-align: center;
+            font: 400;
+            font-family: "Magra";
+            font-family: myFirstFont;
+}
+        
+
+        .sidenav {
+            position: absolute;
+            height: 250px;
+            width: 160px;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #DAD8A7;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 30px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        /* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
+        .icon-bar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            /* Style the icon bar links */
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 20px;
+            }
+
+                /* Style the social media icons with color, if you want */
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        .google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        .linkedin {
+            background: #007bb5;
+            color: white;
+        }
+
+        .youtube {
+            background: #bb0000;
+            color: white;
+        }
+
+        .button {
+            background: linear-gradient(to bottom, #dad8a7 0%, #a8a64a 100%);
+            color: #222;
+            border: 0px;
+            border-radius: 4px;
+        }
+
+        .search {
+            position: fixed;
+            right: -125px;
+            bottom: -10px;
+        }
+
+        .input {
+            border-radius: 4px;
+            color: #222;
+        }
+    </style>
+
+</head>
+<div class="sidenav">
+    <a class="weatherwidget-io" href="https://forecast7.com/en/32d0934d78/tel-aviv-yafo/" data-label_1="TEL AVIV" data-label_2="WEATHER" data-font="Arial Black" data-icons="Climacons Animated" data-mode="Current" data-textcolor="#222">TEL AVIV WEATHER</a>
+    <script>
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+    </script>
+</div>
+<body>
+    <img src="https://i.imgur.com/AS481ZR.png" alt="shake" class="center-block" width="500" height="200">
+
+    <!-- Load font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- The social media icon bar -->
+
+    <div class="icon-bar">
+        <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.google.com/" class="google"><i class="fa fa-google"></i></a>
+        <a href="https://www.linkedin.com/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/" class="youtube"><i class="fa fa-youtube"></i></a>
+    </div>
+
+    <div class="navbar my-nav navbar-inverse navbar-fixed-top navbar-dark bg-primary">
+
+
+
+
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Second Hand Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Notices", "", "Notices")</li>
+                    <li>@Html.ActionLink("Users", "", "Users")</li>
+                    <li>@Html.ActionLink("Log in", "", "Connection")</li>
+                    <li>@Html.ActionLink("Branches", "", "Branches")</li>
+                    <li>@Html.ActionLink("Recommendtions", "topNotice", "Notices")</li>
+                    <li>@Html.ActionLink("Pie chart", "", "PieChart")</li>
+                    <li class="search">
+                        @using (Html.BeginForm("Index", "Notices"))
+                        {
+                            <input class="input" type="text" id="SearchString" name="SearchString" />
+                            <button class="button" type="submit">Search</button>
+                        }
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <div class="footer">
+        <p>Second Hand Shop / Made for Web Application Development Course / Or Gerasi,Tom Shraib,Yuval Gershfeld</p>
+    </div>
+</body>
+</html>

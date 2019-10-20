@@ -1,0 +1,166 @@
+﻿@model IEnumerable<secondHandPro.Models.User>
+@{
+    ViewBag.Title = "Log In Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V8</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <style>
+        body {
+            background: #DAD8A7;
+            
+        }
+        
+        h4 {
+        font-size: medium;
+        font: 700;
+        font-weight: 700;
+        }
+
+         h2 {
+            color: #DAD8A7;
+            font-weight: 400;
+            position: center;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        dl.dl-horizontal {
+        font-size: medium;
+        background-color: #222;
+        color: #DAD8A7;
+        border-width: 10px;
+        padding: 10px;
+        }
+      
+        .button{
+             
+             background:linear-gradient(to bottom, #dad8a7 0%, #a8a64a 100%);
+             color:#222;
+             border:0px;
+             border-radius: 4px;
+        }
+
+        .input{
+            border-radius: 4px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <div class="container" align="center">
+        <div id="content">          
+            <dl class="dl-horizontal">
+                <dt>
+                    <h4>Username: </h4>
+                </dt>
+
+                <dd>
+                    <input class="input" type="text" id="usernameInput" placeholder="Username" />
+                </dd>
+
+                <dt>
+                    <h4>Password: </h4>
+                    <br>
+                    <button class="button" id="submit">Submit</button>
+                    <button class="button" id="logOut">Log Out</button>
+
+                </dt>
+
+                <dd>
+                    <input class="input" type="password" id="passwordInput" placeholder="Password" />
+                </dd>
+                
+            </dl>             
+            
+            <div id="dataDiv"></div>
+            
+            <dl class="dl-horizontal">
+                <h2>Dont Have User? Sign Up Here:</h2>
+                <button class="button" id="SignUp">Sign Up</button>
+            </dl>
+            
+        </div>
+    </div>
+
+
+
+
+
+    <script type="text/javascript">
+        function Signup() {
+            location.href = "/Users/Create";
+        }
+        $(document).ready(function () {
+            $("#SignUp").click(function (e) {
+                location.href = "/Users/Create";
+            })
+          });
+        /*$(document).ready(function () {
+            $("logOut").click(function (e) {
+                $.ajax({
+                        //traditional: true,
+                        type: 'POST',
+                        url: '/Connection/LogOut',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'html',
+                          success: function (result, status, xhr) {
+                      
+            })
+        
+          });*/
+        $(document).ready(function () {
+            $("#submit").click(function (e) {
+                if ($("#usernameInput").val() == "")
+                    alert("Username cannot be empty");
+                else if ($("#passwordInput").val() == "")
+                    alert("Password cannot be empty");
+                else {
+
+                      $.ajax({
+                        //traditional: true,
+                        type: 'POST',
+                        url: '/Connection/CheckSignIn',
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"userName":"' + $("#usernameInput[type=text]").val() + '","password":"' + $("#passwordInput[type=password]").val() + '"}',
+                        dataType: 'html',
+                          success: function (result, status, xhr) {
+                              alert('Login Status:' + result);
+                              $("#dataDiv").html(result);
+                              if (result == "Login Succeful") {
+                                  //$("#dataDiv").html("hello:" + Session["name"].ToString());
+                                  location.href = "/Home";
+                                  //getUser();
+                                  //$("#dataDiv").html("hello:" + getUser());
+                              }
+                          }
+
+                    });
+
+                }
+            });
+        });
+        function getUser() {
+            $.ajax({
+                type: 'POST',
+                url: '/Connection/returnUserName',
+                success: function (result, status, xhr) {
+                    $("#dataDiv").html("hello:" + result);
+                }
+
+            });
+        }
+        
+    </script>
+
+
+
+</body>
+</html>

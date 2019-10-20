@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "UnAuthorized2";
+}
+
+<h2>UnAothurized</h2>
+<p>@ViewData["Message"]</p>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <p>You need to Login To do this!</p>
+    <button id="login">Login</button>
+    <script type="text/javascript">
+         $(document).ready(function () {
+            $("#login").click(function (e) {
+                location.href = "/Connection";
+            })
+          });
+
+    </script>
+</body>
+</html>

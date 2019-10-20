@@ -1,0 +1,83 @@
+﻿@model IEnumerable<secondHandPro.Models.User>
+
+<h2 align="center">Users</h2>
+
+<style>
+
+    table.table tr {
+        background-color: #222;
+        color: #DAD8A7;
+        border-color: #222;
+        outline-color: #222;
+        border: 1px;
+        font: 400;
+        border-top: 10px solid #DAD8A7;
+    }
+
+    table.table th {
+        font-size: large;
+        border: 1px;
+    }
+
+    table.table td {
+        padding-top: 40px;
+        font-size: medium;
+        border: 1px;
+    }
+
+     h2 {
+        color: #333;
+        font-weight: 400;
+        position: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        text-shadow: 2px 2px #888;
+    }
+      div.createnew {
+        font: 400;
+        font-size: large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: #333;
+    }
+</style>
+
+<div class="createnew">
+    @Html.ActionLink("Create New", "Create")
+</div>
+    
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Username }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Username }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Username })
+            </td>
+        </tr>
+    }
+
+</table>

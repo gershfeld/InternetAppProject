@@ -1,0 +1,139 @@
+﻿@model secondHandPro.Models.Notice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Noitce Details</h2>
+<script>
+    function mail() {
+        window.open('mailto:tshraib@gmail.com');
+    }
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v4.0"></script>
+
+<style>
+    h2 {
+        color: #333;
+        font-weight: 400;
+        position: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        text-shadow: 2px 2px #888;
+    }
+
+    h4 {
+        font-size: medium;
+        font: 700;
+        font-weight: 700;
+    }
+
+    hr {
+        border-color: #222;
+    }
+
+    dl.dl-horizontal {
+        font-size: medium;
+        background-color: #222;
+        color: #DAD8A7;
+        border-width: 10px;
+        padding: 10px;
+    }
+
+    .gmail {
+        background-color: #D44638;
+        color: #EEEEEE;
+        width: 107px;
+        height: 30px;
+        font-family: 'Roboto', sans-serif;
+        font-size: medium;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 700;
+        border: none;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        border-radius: 4px;
+    }
+
+    
+    
+   
+</style>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+
+
+    </dl>
+
+    <dl class="dl-horizontal">
+
+        <dt>
+            <h4>Contact @Html.DisplayFor(model => model.Name)</h4>
+        </dt>
+
+        <dd>
+            <button class="gmail" onclick="mail()">Email</button>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">שתף</a></div>        
+        </dd>
+
+    </dl>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

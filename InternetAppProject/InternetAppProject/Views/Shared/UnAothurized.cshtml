@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "UnAothurized";
+}
+
+<h2>Unauthorized</h2>
+<p>@ViewData["Message"]</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h2{
+        color: #333;
+        font-weight: 400;
+        position: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        text-shadow: 2px 2px #888;
+        }
+
+        p{
+            font-style:italic;
+        }
+
+       .button{
+             
+             background:linear-gradient(to bottom, #dad8a7 0%, #a8a64a 100%);
+             color:#222;
+             border:0px;
+             border-radius: 4px;
+        }
+        
+        hr{
+            border-color:#333;
+        }
+        
+    </style>
+</head>
+<body>
+    <p>Login to an admin user to do this action</p>
+    <hr />
+    <button class="button" onclick="myFunction()" id="login">Login</button>
+    <script type="text/javascript">
+        
+        function myFunction(){
+            location.href = "/Connection";
+        }
+    </script>   
+</body>
+</html>
+
+

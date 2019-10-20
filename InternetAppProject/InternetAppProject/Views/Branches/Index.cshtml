@@ -1,0 +1,94 @@
+﻿@model IEnumerable<secondHandPro.Models.Branch>
+
+@{
+    ViewBag.Title = "Index";
+}
+                      <aside>
+                          <h2>Branches</h2>
+                      </aside>
+    <section>
+        <h2>Explaining </h2>
+            <p>
+            Those are our branches in the country their use is for customers service and help stained in Jersualem,Hifa and Tel-Aviv
+            </p>
+       
+    </section>
+<style>
+
+    table.table tr {
+        background-color: #222;
+        color: #DAD8A7;
+        border-color: #222;
+        outline-color: #222;
+        border: 1px;
+        font: 400;
+        border-top: 10px solid #DAD8A7;
+    }
+
+    table.table th {
+        font-size: large;
+        border: 1px;
+    }
+
+    table.table td {
+        padding-top: 40px;
+        font-size: medium;
+        border: 1px;
+    }
+
+    h2 {
+        color: #333;
+        font-weight: 400;
+        position: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        text-shadow: 2px 2px #888;
+    }
+   
+    hr.thishr{
+        border-color:#222;
+    }
+   
+</style>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hours)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+
+        <td>          
+            @Html.ActionLink("Details", "Details", new { id=item.ID })           
+        </td>
+    </tr>
+}
+
+</table>
+
+<hr class="thishr">
+
+<div class="pic1">
+    <img src=" https://i.imgur.com/efXJcgF.png" class="center-block" alt="car" >   
+</div>
+
+<br>
+<br>
+    

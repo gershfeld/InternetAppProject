@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<
+<meta charset="utf-8">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        alert("please wait for the ready alert");
+        function getCars(callback) {
+            return $.ajax({
+                type: 'POST',
+                url: '/Notices/countCars',
+                contentType: "application/json; charset=utf-8",
+                success: callback
+
+            });
+        }
+        function getFur(callback) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Notices/countFur',
+                contentType: "application/json; charset=utf-8",
+                success: callback
+
+            });
+
+        }
+        function getSports(callback) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Notices/conttSprots',
+                contentType: "application/json; charset=utf-8",
+                success: callback
+
+            });
+
+        }
+        function getJe(callback) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Notices/countJE',
+                contentType: "application/json; charset=utf-8",
+                success: callback
+
+            });
+
+        }
+        var dat;
+        function getelec(callback) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Notices/countElec',
+                //contentType: "application/json; charset=utf-8",
+                success: callback
+
+            });
+
+        }
+        function GetPriceRange(callback) {
+            $.ajax({
+                type: 'POST',
+                url: '/Notices/PriceRange',
+                success: callback
+            });
+        }
+    </script>
+</head>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<p align="right">
+    <input id="draw" type="button" value="Calculate Graph" />
+</p>
+<br />
+<p align="right">
+    <input id="draw2" type="button" value="Go To Graph2" />
+</p>
+<!-- Create a div where the graph will take place -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="graph" id="my_dataviz"></div>
+<ul class="legend">
+    <li><span class="superawesome"></span> Cars</li>
+    <li><span class="awesome"></span> Electronics</li>
+    <li><span class="kindaawesome"></span> Furniture</li>
+    <li><span class="notawesome"></span> Jewlrey</li>
+    <li><span class="sport"></span> Sports</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+    .legend {
+        text-align: start;
+        list-style: none;
+        margin: auto;
+    }
+
+        .legend li {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .legend span {
+            text-align: center;
+            border: 1px solid #ccc;
+            float: left;
+            width: 12px;
+            height: 12px;
+            margin: 2px;
+        }
+        /* your colors */
+        .legend .superawesome {
+            background-color: #98abc5;
+        }
+
+        .legend .awesome {
+            background-color: #8a89a6;
+        }
+
+        .legend .kindaawesome {
+            background-color: #7b6888;
+        }
+
+        .legend .notawesome {
+            background-color: #6b486b;
+        }
+
+        .legend .sport {
+            background-color: #a05d56;
+        }
+
+    .legend {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        margin-right: 20px;
+    }
+
+    .graph {
+        position: absolute;
+        bottom: 75px;
+        right: 200px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#draw2").click(function (e) {
+            location.href = '/PieChart2/Index';
+        })
+            });
+
+    //Graph 1
+    var width = 350
+    height = 350
+    margin = 40
+
+    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+    var radius = Math.min(width, height) / 2 - margin
+
+    // append the svg object to the div called 'my_dataviz'
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+    getCars(function (myData) {
+        //alert("myData = " + myData);
+    })
+    var dat;
+    getCars(function (carsData) {
+        getelec(function (elecData) {
+            getFur(function (FurData) {
+                getJe(function (JEData) {
+                    getSports(function (SportsData) {
+                        alert("ready to calculate graph");
+                        dat = { a: carsData, b: elecData, c: FurData, d: JEData, e: SportsData };
+                    })
+                })
+            })
+
+
+        })
+    })
+    $(document).ready(function () {
+        $("#draw").click(function (e) {
+
+            //var data = {a: dat, b: parseInt(getelec()), c: parseInt(getFur()), d: parseInt(getJe()), e: parseInt(getSports()) }
+            console.log(dat);
+            //var data = { a: 22, b: 50, c: 1, d: 30, e: 10 }
+            // set the color scale
+            var color = d3.scaleOrdinal()
+                .domain(dat)
+                .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+
+            // Compute the position of each group on the pie:
+            var pie = d3.pie()
+                .value(function (d) { return d.value; })
+            var data_ready = pie(d3.entries(dat))
+
+            // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+            svg
+                .selectAll('whatever')
+                .data(data_ready)
+                .enter()
+                .append('path')
+                .attr('d', d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
+                )
+                .attr('fill', function (d) { return (color(d.data.key)) })
+                .attr("stroke", "black")
+                .style("stroke-width", "2px")
+                .style("opacity", 0.7)
+        })
+    });
+
+</script>
